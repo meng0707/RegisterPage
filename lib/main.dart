@@ -14,12 +14,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  @override
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  double _weightValue = 60.0;
+  double _heightValue = 170.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text(''),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -29,7 +37,7 @@ class RegisterScreen extends StatelessWidget {
             children: [
               Center(
                 child: CircleAvatar(
-                  radius: 50,
+                  radius: 60,
                   backgroundColor: Colors.blue,
                   child: Text(
                     'Your Logo',
@@ -82,26 +90,37 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Text('Weight'),
+              Text(
+                'Weight: ${_weightValue.toInt()} kg',
+                style: TextStyle(fontSize: 16),
+              ),
               Slider(
-                value: 70,
-                min: 0,
-                max: 200,
-                divisions: 200,
-                label: '70',
-                onChanged: (value) {
-                  // Handle weight change
+                value: _weightValue,
+                min: 30,
+                max: 150,
+                divisions: 120,
+                label: _weightValue.toInt().toString(),
+                onChanged: (double value) {
+                  setState(() {
+                    _weightValue = value;
+                  });
                 },
               ),
-              Text('Height'),
+              SizedBox(height: 20),
+              Text(
+                'Height: ${_heightValue.toInt()} cm',
+                style: TextStyle(fontSize: 16),
+              ),
               Slider(
-                value: 170,
-                min: 0,
-                max: 250,
-                divisions: 250,
-                label: '170',
-                onChanged: (value) {
-                  // Handle height change
+                value: _heightValue,
+                min: 100,
+                max: 220,
+                divisions: 120,
+                label: _heightValue.toInt().toString(),
+                onChanged: (double value) {
+                  setState(() {
+                    _heightValue = value;
+                  });
                 },
               ),
               SizedBox(height: 20),
@@ -114,7 +133,7 @@ class RegisterScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => Page2()),
                     );
                   },
-                  child: Text('Register'),
+                  child: Text('Nextpage'),
                 ),
               ),
             ],
